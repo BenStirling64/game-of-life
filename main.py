@@ -2,7 +2,7 @@ from board import Board
 
 
 def main():
-    board = Board(1024, 1024)
+    board = Board(400, 400, 4)
 
     while board.is_running:
         board.tick()
