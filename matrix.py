@@ -48,8 +48,9 @@ class Matrix:
                     if not connection_coords in cells_to_be:
                         connection = Cell(*connection_coords)
                         cells_to_be[connection_coords] = connection
-
-                    cells_to_be[connection_coords].counter += 1
+                        connection.counter = 1
+                    else:
+                        cells_to_be[connection_coords].counter += 1
 
         return cells_to_be
 
@@ -58,28 +59,38 @@ class Matrix:
         cells_to_be = {}
 
         for coords in self.cells:
-            for connection_coords in self.cells[coords].connections:
+            connections = self.cells[coords].connections
+
+            for connection_coords in connections:
                 if connection_coords in self.cells:
                     if not connection_coords in cells_to_be:
-                        cells_to_be[connection_coords] = self.cells[connection_coords]
-                    
-                    cells_to_be[connection_coords].counter += 1
+                        cell = self.cells[connection_coords]
+
+                        cells_to_be[connection_coords] = cell
+
+                        cell.counter += 1
+                    else:
+                        cells_to_be[connection_coords].counter += 1
 
         return cells_to_be
 
 
     def add_cells(self, cells_to_be):
         for coords in cells_to_be:
-            if cells_to_be[coords].counter == 3:
-                self.cells[coords] = cells_to_be[coords]
-                self.cells[coords].counter = 0
+            cell = cells_to_be[coords]
+
+            if cell.counter == 3:
+                self.cells[coords] = cell
+                cell.counter = 0
 
     
     def cull_cells(self, cells_to_be):
         for coords in cells_to_be:
-            if cells_to_be[coords].counter >= 2 and cells_to_be[coords].counter < 4:
-                self.cells[coords] = cells_to_be[coords]
-                self.cells[coords].counter = 0
+            cell = cells_to_be[coords]
+
+            if cell.counter >= 2 and cell.counter < 4:
+                self.cells[coords] = cell
+                cell.counter = 0
 
 
     def update(self):
