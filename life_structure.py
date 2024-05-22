@@ -13,3 +13,6 @@ class LifeStructure:
         verification_matrix = matrix.FTMatrix.blank_verification(self.matrix.width, self.matrix.height)
 
         self.matrix.recursively_tick(self.root, auxiliary_matrix, verification_matrix)
+
+    def __str__(self):
+        return str(self.matrix)
