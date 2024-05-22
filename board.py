@@ -1,6 +1,7 @@
 import random
 import pygame
-from matrix import Matrix
+import life_structure
+import matrix
 
 
 class Board:
@@ -12,7 +13,7 @@ class Board:
         self.zoom = zoom
         self.clock = pygame.time.Clock()
         self.is_running = True
-        self.matrix = Matrix(int(width / zoom), int(height / zoom))
+        self.structure = life_structure.LifeStructure(matrix.NFTMatrix(int(width / zoom), int(height / zoom)))
         self.display = pygame.display
         self.window = self.display.set_mode((width, height))
 
@@ -26,13 +27,13 @@ class Board:
         # drawing
         self.window.fill('black')
 
-        for coords in self.matrix.cells:
+        for coords in self.structure.matrix:
             pygame.draw.rect(self.window, pygame.Color('white'), pygame.Rect(coords[0] * self.zoom, coords[1] * self.zoom, self.zoom, self.zoom))
 
         pygame.display.flip()
 
         # logic update
-        self.matrix.update()
+        self.structure.update()
 
         # clock ticking
         self.clock.tick(60)
