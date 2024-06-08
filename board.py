@@ -4,7 +4,7 @@ from matrix import Matrix
 
 
 class Board:
-    def __init__(self, width, height, zoom):
+    def __init__(self, width=1600, height=800, zoom=4):
         pygame.init()
 
         self.width = width
