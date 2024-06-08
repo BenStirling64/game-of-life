@@ -17,4 +17,4 @@ def argument_parser(arg_list):
     return board_properties
 
 def print_help():
-    pass
+    print('sorry no help yet :(')
