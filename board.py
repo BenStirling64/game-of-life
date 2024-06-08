@@ -4,17 +4,18 @@ from matrix import Matrix
 
 
 class Board:
-    def __init__(self, width=1600, height=800, zoom=4):
+    def __init__(self, arguments):
         pygame.init()
 
-        self.width = width
-        self.height = height
-        self.zoom = zoom
+        self.width = arguments.get('width') or 1600
+        self.height = arguments.get('height') or 800
+        self.zoom = arguments.get('cell_size') or 4
+        self.frame_rate = arguments.get('frame_rate') or 60
         self.clock = pygame.time.Clock()
         self.is_running = True
-        self.matrix = Matrix(int(width / zoom), int(height / zoom))
+        self.matrix = Matrix(int(self.width / self.zoom), int(self.height / self.zoom))
         self.display = pygame.display
-        self.window = self.display.set_mode((width, height))
+        self.window = self.display.set_mode((self.width, self.height))
 
 
     def tick(self):
@@ -35,4 +36,4 @@ class Board:
         self.matrix.update()
 
         # clock ticking
-        self.clock.tick(60)
+        self.clock.tick(self.frame_rate)

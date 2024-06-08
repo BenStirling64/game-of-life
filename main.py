@@ -1,7 +1,17 @@
 from board import Board
+from utils import argument_parser, print_help
 import sys
 
 def main():
+    args = argument_parser(sys.argv)
+
+    if args.get('send_help'):
+        print_help()
+        return
+
+    board = Board(args)
+
+    """
     if len(sys.argv) == 1:
         board = Board()
     elif len(sys.argv) == 3:
@@ -19,6 +29,7 @@ def main():
     else:
         print("Usage: python3 main.py <width> <height>")
         return
+    """
 
     while board.is_running:
         board.tick()
