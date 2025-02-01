@@ -1,7 +1,9 @@
-import random
-import pygame
+import os, random
 from matrix import Matrix
 
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+
+import pygame
 
 class Board:
     def __init__(self, arguments):
